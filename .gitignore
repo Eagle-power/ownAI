@@ -1,0 +1,76 @@
+
+# Node modules in root, client, and server
+node_modules/
+client/node_modules/
+server/node_modules/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+logs/
+*.log
+
+# Environment files
+.env
+.env.*
+client/.env
+server/.env
+!*.env.example
+
+# OS crap
+.DS_Store
+Thumbs.db
+
+# Editor settings
+.vscode/
+.idea/
+*.iml
+
+# Monorepo cache
+pnpm-lock.yaml
+pnpm-workspace.yaml
+.pnp.cjs
+.pnp.data.json
+.pnp/
+.cache/
+
+# Coverage output
+coverage/
+client/coverage/
+server/coverage/
+
+# ============================
+# Client (React) ignores
+# ============================
+
+# Build outputs
+client/build/
+client/dist/
+client/.next/
+client/out/
+client/.parcel-cache/
+
+# React-related caches
+client/.eslintcache
+
+# TypeScript
+client/*.tsbuildinfo
+
+# ============================
+# Server (Node/Express) ignores
+# ============================
+
+# Server build output (if using TypeScript)
+server/dist/
+server/build/
+server/*.tsbuildinfo
+ 
+
+# Temporary files 
+tmp/
+temp/
+*.tmp
+*.swp
+*.swo
