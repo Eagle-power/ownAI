@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"; // 1. Import Navigate
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import PurchaseOrderPage from "./pages/PurchaseOrderPage";
 
 function App() {

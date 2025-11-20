@@ -116,7 +116,7 @@ const TalentSection = ({ section, index }) => {
             />
           </div>
 
-          {/* Delete Button (Aligns to the right) */}
+           
           <div className="col-md-1 text-end d-flex align-items-end justify-content-end">
             {!isReadOnly && index > 0 && (
               <button
@@ -126,7 +126,7 @@ const TalentSection = ({ section, index }) => {
                 title="Remove Section"
               >
                 <i className="bi bi-trash fs-5"></i>{" "}
-                {/* Requires Bootstrap Icons */}
+                 
                 <span className="d-none">Delete</span>
               </button>
             )}

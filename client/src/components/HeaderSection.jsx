@@ -9,7 +9,23 @@ const HeaderSection = ({ errors }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    dispatch(setField({ name, value }));
+
+    // For date inputs, store back as full ISO string
+    if (e.target.type === "date" && value) {
+      const isoValue = new Date(value).toISOString();
+      dispatch(setField({ name, value: isoValue }));
+    } else {
+      dispatch(setField({ name, value }));
+    }
+  };
+
+  const formatDateForInput = (dateString) => {
+    if (!dateString) return "";
+    try {
+      return new Date(dateString).toISOString().split("T")[0];
+    } catch {
+      return "";
+    }
   };
 
   // Helper class for consistent label styling
@@ -19,7 +35,6 @@ const HeaderSection = ({ errors }) => {
     <div className="card border-0 mb-4">
       <div className="card-body p-0">
         <div className="d-flex flex-column gap-3">
-          {/* ROW 1: Client, Type, PO No, Received On (4 items) */}
           <div className="row g-2">
             {/* 1. Client Name */}
             <div className="col-md-3">
@@ -91,14 +106,13 @@ const HeaderSection = ({ errors }) => {
                 type="date"
                 className="form-control form-control-sm"
                 name="receivedOn"
-                value={formData.receivedOn}
+                value={formatDateForInput(formData.receivedOn)}
                 onChange={handleChange}
                 disabled={isReadOnly}
               />
             </div>
           </div>
 
-          {/* ROW 2: Rec Name, Rec Email, Start, End, Budget, Curr (6 items) */}
           <div className="row g-2">
             {/* 1. Received From Name */}
             <div className="col-md-2">
@@ -118,8 +132,7 @@ const HeaderSection = ({ errors }) => {
 
             {/* 2. Received From Email */}
             <div className="col-md-2">
-              <label className={labelClass}>&nbsp;</label>{" "}
-              {/* Spacer to align input */}
+              <label className={labelClass}>&nbsp;</label>
               <input
                 type="email"
                 className="form-control form-control-sm"
@@ -142,7 +155,7 @@ const HeaderSection = ({ errors }) => {
                   errors.poStartDate && "is-invalid"
                 }`}
                 name="poStartDate"
-                value={formData.poStartDate}
+                value={formatDateForInput(formData.poStartDate)}
                 onChange={handleChange}
                 disabled={isReadOnly}
               />
@@ -159,7 +172,7 @@ const HeaderSection = ({ errors }) => {
                   errors.poEndDate && "is-invalid"
                 }`}
                 name="poEndDate"
-                value={formData.poEndDate}
+                value={formatDateForInput(formData.poEndDate)}
                 onChange={handleChange}
                 disabled={isReadOnly}
               />

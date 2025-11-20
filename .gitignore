@@ -40,10 +40,7 @@ pnpm-workspace.yaml
 coverage/
 client/coverage/
 server/coverage/
-
-# ============================
-# Client (React) ignores
-# ============================
+ 
 
 # Build outputs
 client/build/
@@ -57,12 +54,8 @@ client/.eslintcache
 
 # TypeScript
 client/*.tsbuildinfo
-
-# ============================
-# Server (Node/Express) ignores
-# ============================
-
-# Server build output (if using TypeScript)
+  
+ 
 server/dist/
 server/build/
 server/*.tsbuildinfo

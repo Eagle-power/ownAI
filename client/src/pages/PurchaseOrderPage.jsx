@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams, useNavigate } from "react-router-dom"; // 1. IMPORT useNavigate
+import { useParams, useNavigate } from "react-router-dom";
 import { useCreatePOMutation, useGetPOByIdQuery } from "../features/api/poApi";
 import {
   addSection,
@@ -13,7 +13,7 @@ import TalentSection from "../components/TalentSection";
 
 const PurchaseOrderPage = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate(); // 2. INITIALIZE navigate
+  const navigate = useNavigate();
   const { id } = useParams();
 
   // Fetch Data if ID exists
@@ -33,8 +33,6 @@ const PurchaseOrderPage = () => {
   }, [existingPO, dispatch]);
 
   const validate = () => {
-    // ... (Keep your existing validation logic) ...
-    // For brevity, assuming validation logic is here
     let tempErrors = {};
     if (!formData.clientName) tempErrors.clientName = "Required";
     if (!formData.poType) tempErrors.poType = "Required";
@@ -56,14 +54,10 @@ const PurchaseOrderPage = () => {
   const handleSubmit = async () => {
     if (validate()) {
       try {
-        // 3. CAPTURE THE BACKEND RESPONSE
         const result = await createPO(formData).unwrap();
 
         alert("Purchase Order Saved!");
 
-        // 4. NAVIGATE TO THE URL WITH THE NEW ID
-        // Assuming 'result._id' is the ID from MongoDB.
-        // If your backend returns 'id', change it to result.id
         navigate(`/purchase-order/${result._id}`);
 
         dispatch(setReadOnly(true));
@@ -81,10 +75,8 @@ const PurchaseOrderPage = () => {
 
   return (
     <div className="container mt-4 mb-5">
-      {/* ... Keep your existing JSX ... */}
       <div className="card shadow-sm">
         <div className="card-header bg-white">
-          {/* Show ID if available */}
           <h4 className="mb-0 text-danger">
             &lt; Purchase Order | {id ? `View (${id})` : "New"}
           </h4>
@@ -92,7 +84,7 @@ const PurchaseOrderPage = () => {
         <div className="card-body">
           <HeaderSection errors={errors} />
           <hr />
-          {/* ... Talent Section & Buttons ... */}
+
           {formData.talentsDetails.map((section, index) => (
             <TalentSection
               key={section.sectionId || index}
@@ -104,10 +96,16 @@ const PurchaseOrderPage = () => {
           <div className="d-flex justify-content-end gap-2 mt-4">
             <button
               className="btn btn-outline-secondary"
-              onClick={() => dispatch(resetForm())}
+              onClick={() => {
+                dispatch(resetForm()); // Clear Redux form
+                dispatch(setReadOnly(false)); // Make form editable
+                localStorage.clear(); // Clear saved data
+                navigate("/purchase-order"); // Redirect to new PO form
+              }}
             >
               Reset
             </button>
+
             {!isReadOnly && (
               <button
                 className="btn btn-secondary"

@@ -28,13 +28,11 @@ const poSlice = createSlice({
                 state.formData.talentsDetails.forEach(s => s.selectedTalents = []);
             }
         },
-        // 1. NEW: Action to populate form from Backend Data
+         
         setAllFormData: (state, action) => {
-            // We merge incoming data with defaults to prevent errors if some fields are missing
+            
             state.formData = { ...state.formData, ...action.payload };
-
-            // If viewing an existing PO, usually we set it to ReadOnly initially
-            // state.isReadOnly = true; // Optional: Uncomment if you want edit mode to start as read-only
+ 
         },
         addSection: (state) => {
             state.formData.talentsDetails.push({

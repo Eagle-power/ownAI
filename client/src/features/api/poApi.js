@@ -13,10 +13,9 @@ export const poApi = createApi({
         }),
         getTalents: builder.query({
             query: (jobId) => `talents?jobId=${jobId}`,
-        }),
-        // 1. NEW: Fetch single PO by ID
+        }), 
         getPOById: builder.query({
-            query: (id) => `purchase-order/${id}`, // Adjust if your backend route is different (e.g. 'po/${id}')
+            query: (id) => `purchase-order/${id}`, 
             providesTags: (result, error, id) => [{ type: 'PO', id }],
         }),
         createPO: builder.mutation({
@@ -35,5 +34,5 @@ export const {
     useGetJobsQuery,
     useGetTalentsQuery,
     useCreatePOMutation,
-    useGetPOByIdQuery // Export this hook
+    useGetPOByIdQuery 
 } = poApi;
