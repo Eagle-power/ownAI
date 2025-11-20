@@ -1,6 +1,6 @@
 const PurchaseOrder = require('../models/PurchaseOrder');
 
-// --- MOCK MASTER DATA ---
+// --- MASTER DATA ---
 const MASTER_DATA = {
     clients: [
         { id: 1, name: "Collabera - Collabera Inc" },
@@ -46,7 +46,6 @@ exports.createPO = async (req, res) => {
     }
 };
 
-// --- NEW FUNCTION TO GET PO BY ID ---
 exports.getPOById = async (req, res) => {
     try {
         const { id } = req.params;

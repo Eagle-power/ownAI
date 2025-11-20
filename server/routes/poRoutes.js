@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-// Import the new getPOById function
 const {
     getClients,
     getJobs,
@@ -16,7 +15,7 @@ router.get('/talents', getTalents);
 // Route to save
 router.post('/purchase-order', createPO);
 
-// Route to fetch by ID (Used on page refresh/edit)
+// Route to fetch by ID  
 router.get('/purchase-order/:id', getPOById);
 
 module.exports = router;
